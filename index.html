@@ -4,29 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>С 8 Марта!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #fff0f5;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            font-family: 'Pacifico', cursive;
             text-align: center;
             padding: 50px;
+            margin: 0;
+            min-height: 100vh;
+            overflow: hidden;
         }
         h1 {
+            font-size: 48px;
             color: #ff69b4;
+            animation: fadeIn 2s ease-in-out;
         }
         p {
-            font-size: 20px;
+            font-size: 24px;
             color: #333;
+            animation: slideIn 2s ease-in-out;
         }
-        img {
-            max-width: 100%;
-            height: auto;
+        button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            animation: bounce 2s infinite;
+        }
+        button:hover {
+            background-color: #ff1493;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff69b4;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh); }
         }
     </style>
 </head>
 <body>
-    <h1>С Международным женским днем!</h1>
-    <p>Дорогие девочки, поздравляем вас с 8 Марта! Пусть ваша жизнь будет наполнена радостью, улыбками и цветами!</p>
-    <img src="https://via.placeholder.com/600x400" alt="8 Марта">
+    <h1>С 8 Марта!</h1>
+    <p>Дорогие девочки, пусть ваш день будет наполнен радостью и улыбками! 💐</p>
+    <button onclick="celebrate()">Запустить конфетти!</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        function celebrate() {
+            // Запуск конфетти
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+
+            // Добавление падающих элементов
+            for (let i = 0; i < 50; i++) {
+                createConfetti();
+            }
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.animationDuration = Math.random() * 2 + 1 + 's';
+            confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            document.body.appendChild(confetti);
+
+            setTimeout(() => {
+                confetti.remove();
+            }, 5000);
+        }
+    </script>
 </body>
 </html>
